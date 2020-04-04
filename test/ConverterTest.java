@@ -44,8 +44,17 @@ class ConverterTest {
 
     @DisplayName("Đổi cơ số nhi phân khi chuỗi nhập vào là ký tự")
     @Test
-    void setConverter() {
+    void testInvalidToDecimal() {
         converter = new Converter("abcd123");
         assertNull(converter.toDecimal());
+    }
+
+    @DisplayName("Đổi số thập phân dương sang hệ 16")
+    @Test
+    void testToBase16PositiveNumber() {
+        converter = new Converter(1234);
+        String expectedResult = "4D2";
+        String actualResult = converter.toBase16();
+        assertEquals(expectedResult,actualResult);
     }
 }

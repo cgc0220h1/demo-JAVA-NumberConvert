@@ -12,5 +12,9 @@ public class Main {
         for (Integer number : result) {
             System.out.print(number);
         }
+        System.out.println("\n");
+
+        converter = new Converter(-12345);
+        System.out.println(converter.toBase16());
     }
 }
