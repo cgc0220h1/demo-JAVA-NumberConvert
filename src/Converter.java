@@ -1,21 +1,19 @@
 import java.util.Stack;
 
-public class BinaryConverter {
+public class Converter {
     private int decimalBase;
+    private String binaryBase;
     private Stack<Integer> numberStack;
     private boolean isDecimalNegative;
 
-    public BinaryConverter(int decimalBase) {
+    public Converter(int decimalBase) {
         this.decimalBase = decimalBase;
         numberStack = new Stack<>();
     }
 
-    public int getDecimalBase() {
-        return decimalBase;
-    }
-
-    public void setDecimalBase(int decimalBase) {
-        this.decimalBase = decimalBase;
+    public Converter(String binaryBase) {
+        this.binaryBase = binaryBase;
+        numberStack = new Stack<>();
     }
 
     private void divideByTwo() {
@@ -45,4 +43,26 @@ public class BinaryConverter {
         }
         return numbers;
     }
+
+    public Integer toDecimal() {
+        char[] chars = binaryBase.toCharArray();
+        int result = 0;
+        for (char ch : chars) {
+            if(Character.getNumericValue(ch) > 1) {
+                return null;
+            }
+            numberStack.push(Character.getNumericValue(ch));
+        }
+        int base = 0;
+        while (numberStack.size() > 1) {
+            result += numberStack.pop() * Math.pow(2,base);
+            base++;
+        }
+        if (numberStack.peek() == 1) {
+            result *= -1;
+        }
+        return result;
+    }
+
+
 }
